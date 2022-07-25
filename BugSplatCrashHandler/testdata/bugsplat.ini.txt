@@ -1,0 +1,13 @@
+[BugSplat]
+Database=Tormore
+Application=The Floor Is Still Really Cheap Lava
+Version=0.2
+MiniDump=myConsoleCrasher.dmp
+MFA=
+User=TheLostWorldJP
+Email=
+Description=
+UserDescription=Steam ID: 76561198434610064
+CrashType=Unity.Native
+AdditionalFile0=C:\Users\swartzbaugh\AppData\Local\Temp\bsUnityCrashHandler-2c19baa4.log
+Notes=These are some mighty fine notes!

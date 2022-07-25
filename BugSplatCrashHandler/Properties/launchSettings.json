@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BugSplatCrashHandler": {
+      "commandName": "Project",
+      "commandLineArgs": "/i \"C:\\www\\BugSplatCrashHandler\\BugSplatCrashHandler\\testdata\\BsSndRpt.ini\""
+    }
+  }
+}

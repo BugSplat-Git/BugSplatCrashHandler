@@ -1,0 +1,37 @@
+﻿
+2019-04-22 18:47:55 
+***
+*** BugSplat crash transmission report
+***
+2019-04-22 18:47:55 Minidump: C:\www\src\BugSplat\BsSndRpt\testdata\MyCrasher9N650IJ2.dmp
+2019-04-22 18:47:55 setUser: Fred
+2019-04-22 18:47:55 setMail: fred@bedrock.com
+2019-04-22 18:47:55 setUserDescription : Now is the time for all good people to report their crashes!
+2019-04-22 18:47:59 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile1.txt
+2019-04-22 18:47:59 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\错误是坏的.txt
+2019-04-22 18:47:59 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile2.txt
+2019-04-22 18:48:01 Creating zip file: C:\Users\dave\AppData\Local\Temp\2\tormoreCrash_042219_184801.zip
+2019-04-22 18:48:01 Zip added: C:\Users\dave\AppData\Local\Temp\2\5LJ13V92.xml
+2019-04-22 18:48:01 Zip added: C:\www\src\BugSplat\BsSndRpt\testdata\MyCrasher9N650IJ2.dmp
+2019-04-22 18:48:01 Zip added: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile1.txt
+2019-04-22 18:48:01 Zip added: C:\www\src\BugSplat\BsSndRpt\testdata\错误是坏的.txt
+2019-04-22 18:48:01 Zip added: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile2.txt
+2019-04-22 18:48:01 Zip added: C:\www\src\BugSplat\BsSndRpt\testdata\BsCrashLog.txt
+2019-04-22 18:48:02 HTTP getCrashUploadUrl response: tormore.bugsplat.com/api/getcrashuploadurl.php {"status":"success","url":"https:\/\/bugsplat-crashreports.s3-external-1.amazonaws.com\/tormore\/mycrasher-1.0\/2019\/04\/22\/mycrasher_1.0_kjqzmdqh-616297002.zip?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDZSXVIJIASUK6TA%2F20190422%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190422T184802Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=d5fed8fa2f39981349287c1ddfc51b91c9ecac6bec4ea0d341434085a0fe51fe","contentType":"application\/zip, application\/octet-stream"} -----------------------------
+2019-04-22 18:48:02 HTTPS PUT response: https://bugsplat-crashreports.s3-external-1.amazonaws.com/tormore/mycrasher-1.0/2019/04/22/mycrasher_1.0_kjqzmdqh-616297002.zip?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDZSXVIJIASUK6TA%2F20190422%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190422T184802Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=d5fed8fa2f39981349287c1ddfc51b91c9ecac6bec4ea0d341434085a0fe51fe  -----------------------------
+2019-04-22 18:48:02 HTTP commitS3CrashUpload post response: tormore.bugsplat.com/api/commits3crashupload.php {"status":"success","stackKeyId":-1,"crashId":2555,"messageId":99999999,"infoUrl":"https:\/\/app.bugsplat.com\/browse\/crashInfo.php?vendor=tormore&version=1.0&key=&id=99999999&row=2555"} -----------------------------
+2019-04-22 18:48:02 commitS3CrashUpload succeeded.  Database: tormore, appName: MyCrasher, appVersion: 1.0
+2019-04-22 18:48:02 crashId: 2555
+2019-04-22 18:48:02 stackKeyId: -1
+2019-04-22 18:48:02 infoURL:  https://app.bugsplat.com/browse/crashInfo.php?vendor=tormore&version=1.0&key=&id=99999999&row=2555
+2019-04-22 21:10:19 
+***
+*** BugSplat crash transmission report
+***
+2019-04-22 21:10:19 Minidump: C:\www\src\BugSplat\BsSndRpt\testdata\MyCrasher9N650IJ2.dmp
+2019-04-22 21:10:19 setUser: Fred
+2019-04-22 21:10:19 setMail: fred@bedrock.com
+2019-04-22 21:10:19 setUserDescription : Now is the time for all good people to report their crashes!
+2019-04-22 21:10:19 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile1.txt
+2019-04-22 21:10:19 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\错误是坏的.txt
+2019-04-22 21:10:19 Additional file: C:\www\src\BugSplat\BsSndRpt\testdata\TestFile2.txt
