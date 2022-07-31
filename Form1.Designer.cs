@@ -50,6 +50,7 @@ namespace BugSplatCrashHandler
             this.sendErrorReportButton.TabIndex = 0;
             this.sendErrorReportButton.Text = "Send Error Report";
             this.sendErrorReportButton.UseVisualStyleBackColor = true;
+            this.sendErrorReportButton.Click += new System.EventHandler(this.sendErrorReportButton_Click);
             // 
             // userDescriptionTextbox
             // 
@@ -77,7 +78,6 @@ namespace BugSplatCrashHandler
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Don\'t Send";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // viewReportDetailsButton
             // 
@@ -94,7 +94,7 @@ namespace BugSplatCrashHandler
             this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(29, 240);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(282, 15);
+            this.label1.Size = new System.Drawing.Size(283, 15);
             this.label1.TabIndex = 5;
             this.label1.Text = "Your program has encountered an unexpected error.";
             // 
@@ -108,7 +108,6 @@ namespace BugSplatCrashHandler
             this.label2.Text = "Reporting this error will help improve product reliability.  All information coll" +
     "ected is confidential and will only be used to improve future versions of this p" +
     "rogram.";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 

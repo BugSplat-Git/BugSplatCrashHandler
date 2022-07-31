@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BugSplatCrashHandler": {
+      "commandName": "Project",
+      "commandLineArgs": "-i testdata/BsSndRpt.ini",
+      "workingDirectory": "$(ProjectDir)",
+      "remoteDebugEnabled": false
+    }
+  }
+}

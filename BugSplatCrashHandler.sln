@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugSplatCrashHandler", "BugSplatCrashHandler\BugSplatCrashHandler.csproj", "{116FCC30-1D34-45B3-9334-6F8F17A9F557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugSplatCrashHandler", "C:\www\BugSplatCrashHandler\BugSplatCrashHandler.csproj", "{C4D17624-54D3-4098-80A9-44E1EABA61DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{116FCC30-1D34-45B3-9334-6F8F17A9F557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{116FCC30-1D34-45B3-9334-6F8F17A9F557}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{116FCC30-1D34-45B3-9334-6F8F17A9F557}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{116FCC30-1D34-45B3-9334-6F8F17A9F557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D17624-54D3-4098-80A9-44E1EABA61DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D17624-54D3-4098-80A9-44E1EABA61DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D17624-54D3-4098-80A9-44E1EABA61DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D17624-54D3-4098-80A9-44E1EABA61DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A818E8E9-2624-4F84-B91A-C87B950E859A}
+		SolutionGuid = {F57D308C-CE95-4CD3-A75A-328BB7DB8DFD}
 	EndGlobalSection
 EndGlobal

@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using CommandLine;
 
 namespace BugSplatCrashHandler
 {
     static class Program
     {
-        
+        public static IniFile crash_ini = new IniFile();
 
         public class Options
         {
-            [Option('i', "iniFile", Required = true, HelpText = "Configuration file.")]
-            public String IniFile { get; set; }
+            [Option('i', "iniFile", Required = false, HelpText = "Configuration file.")]
+            public String? IniFile { get; set; }
 
             [Option('q', "quietMode", Required = false, HelpText = "Don't prompt for user input.")]
             public bool QuietMode { get; set; }
@@ -25,7 +20,11 @@ namespace BugSplatCrashHandler
 
         static void RunOptions(Options opts)
         {
-            IniFile crash_ini = new IniFile(opts.IniFile);
+            // We won't get here if IniFile is null, but the compiler can't figure that out
+            if (opts.IniFile != null)
+            {
+                crash_ini = new IniFile(opts.IniFile);
+            }
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
