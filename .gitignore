@@ -4,3 +4,5 @@
 
 /.vs/BugSplatCrashHandler
 /obj
+/bin/Debug/net6.0-windows
+/.vs/ProjectEvaluation
