@@ -12,9 +12,19 @@ namespace BugSplatCrashHandler
 {
     public partial class CrashDataDetails : Form
     {
-        public CrashDataDetails()
+        public CrashDataDetails( List<FileInfo> Attachments )
         {
             InitializeComponent();
+
+            foreach (FileInfo fInfo in Attachments)
+            {
+                this.dataGridView1.Rows.Add(fInfo.Name, fInfo.Directory);
+            }
+        }
+
+        private void OK_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

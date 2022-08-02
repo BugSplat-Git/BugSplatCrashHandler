@@ -54,44 +54,45 @@ namespace BugSplatCrashHandler
             this.sendErrorReportButton.FlatAppearance.BorderSize = 0;
             this.sendErrorReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sendErrorReportButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.sendErrorReportButton.Location = new System.Drawing.Point(22, 397);
+            this.sendErrorReportButton.Location = new System.Drawing.Point(13, 389);
             this.sendErrorReportButton.Name = "sendErrorReportButton";
-            this.sendErrorReportButton.Size = new System.Drawing.Size(121, 23);
-            this.sendErrorReportButton.TabIndex = 0;
-            this.sendErrorReportButton.Text = "Send Error Report";
+            this.sendErrorReportButton.Size = new System.Drawing.Size(121, 30);
+            this.sendErrorReportButton.TabIndex = 4;
+            this.sendErrorReportButton.Text = "&Send";
             this.sendErrorReportButton.UseVisualStyleBackColor = false;
             this.sendErrorReportButton.Click += new System.EventHandler(this.sendErrorReportButton_Click);
             // 
             // userDescriptionTextbox
             // 
-            this.userDescriptionTextbox.Location = new System.Drawing.Point(21, 275);
+            this.userDescriptionTextbox.Location = new System.Drawing.Point(14, 266);
             this.userDescriptionTextbox.Multiline = true;
             this.userDescriptionTextbox.Name = "userDescriptionTextbox";
-            this.userDescriptionTextbox.Size = new System.Drawing.Size(395, 116);
-            this.userDescriptionTextbox.TabIndex = 1;
+            this.userDescriptionTextbox.Size = new System.Drawing.Size(395, 115);
+            this.userDescriptionTextbox.TabIndex = 3;
             this.userDescriptionTextbox.TextChanged += new System.EventHandler(this.userDescriptionTextbox_TextChanged);
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelButton.Location = new System.Drawing.Point(160, 397);
+            this.cancelButton.Location = new System.Drawing.Point(151, 389);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(99, 23);
-            this.cancelButton.TabIndex = 3;
-            this.cancelButton.Text = "Don\'t Send";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Size = new System.Drawing.Size(99, 30);
+            this.cancelButton.TabIndex = 5;
+            this.cancelButton.Text = "&Don\'t Send";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
             // 
             // viewReportDetailsButton
             // 
             this.viewReportDetailsButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.viewReportDetailsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.viewReportDetailsButton.Location = new System.Drawing.Point(280, 397);
+            this.viewReportDetailsButton.Location = new System.Drawing.Point(270, 389);
             this.viewReportDetailsButton.Name = "viewReportDetailsButton";
-            this.viewReportDetailsButton.Size = new System.Drawing.Size(136, 23);
-            this.viewReportDetailsButton.TabIndex = 4;
-            this.viewReportDetailsButton.Text = "Report Details";
-            this.viewReportDetailsButton.UseVisualStyleBackColor = true;
+            this.viewReportDetailsButton.Size = new System.Drawing.Size(136, 30);
+            this.viewReportDetailsButton.TabIndex = 6;
+            this.viewReportDetailsButton.Text = "&Report Details";
+            this.viewReportDetailsButton.UseVisualStyleBackColor = false;
             this.viewReportDetailsButton.Click += new System.EventHandler(this.viewReportDetailsButton_Click);
             // 
             // errorLabel
@@ -99,7 +100,7 @@ namespace BugSplatCrashHandler
             this.errorLabel.AutoSize = true;
             this.errorLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.errorLabel.Location = new System.Drawing.Point(21, 114);
+            this.errorLabel.Location = new System.Drawing.Point(12, 114);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(374, 20);
             this.errorLabel.TabIndex = 5;
@@ -107,9 +108,9 @@ namespace BugSplatCrashHandler
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(21, 141);
+            this.label2.Location = new System.Drawing.Point(12, 141);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(373, 46);
+            this.label2.Size = new System.Drawing.Size(394, 46);
             this.label2.TabIndex = 6;
             this.label2.Text = "Reporting this error will help improve product reliability.  All information coll" +
     "ected is confidential and will only be used to improve future versions of this p" +
@@ -118,7 +119,7 @@ namespace BugSplatCrashHandler
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 257);
+            this.label3.Location = new System.Drawing.Point(14, 248);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(316, 15);
             this.label3.TabIndex = 7;
@@ -127,19 +128,19 @@ namespace BugSplatCrashHandler
             // username
             // 
             this.username.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.username.Location = new System.Drawing.Point(233, 218);
+            this.username.Location = new System.Drawing.Point(227, 218);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(182, 23);
-            this.username.TabIndex = 8;
+            this.username.TabIndex = 2;
             this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // email
             // 
             this.email.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.email.Location = new System.Drawing.Point(22, 218);
+            this.email.Location = new System.Drawing.Point(14, 218);
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(182, 23);
-            this.email.TabIndex = 9;
+            this.email.TabIndex = 1;
             this.email.TextChanged += new System.EventHandler(this.email_TextChanged);
             // 
             // pictureBox2
@@ -154,7 +155,7 @@ namespace BugSplatCrashHandler
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(21, 200);
+            this.emailLabel.Location = new System.Drawing.Point(12, 200);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(94, 15);
             this.emailLabel.TabIndex = 11;
@@ -163,7 +164,7 @@ namespace BugSplatCrashHandler
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(233, 200);
+            this.nameLabel.Location = new System.Drawing.Point(224, 200);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(97, 15);
             this.nameLabel.TabIndex = 12;
@@ -172,7 +173,7 @@ namespace BugSplatCrashHandler
             // poweredByBugSplatLabel
             // 
             this.poweredByBugSplatLabel.AutoSize = true;
-            this.poweredByBugSplatLabel.Location = new System.Drawing.Point(296, 441);
+            this.poweredByBugSplatLabel.Location = new System.Drawing.Point(288, 422);
             this.poweredByBugSplatLabel.Name = "poweredByBugSplatLabel";
             this.poweredByBugSplatLabel.Size = new System.Drawing.Size(119, 15);
             this.poweredByBugSplatLabel.TabIndex = 13;
@@ -184,7 +185,8 @@ namespace BugSplatCrashHandler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 465);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(422, 448);
             this.Controls.Add(this.poweredByBugSplatLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.emailLabel);

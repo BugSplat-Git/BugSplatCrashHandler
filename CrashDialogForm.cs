@@ -126,8 +126,8 @@ namespace BugSplatCrashHandler
 
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
         {
-            CrashDataDetails ofd = new CrashDataDetails();
-            DialogResult dr = ofd.ShowDialog();
+            CrashDataDetails dlg = new CrashDataDetails(options.Attachments);
+            dlg.ShowDialog();
         }
 
         private void poweredByBugSplatLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -139,6 +139,11 @@ namespace BugSplatCrashHandler
                 browser.StartInfo.UseShellExecute = true;
                 browser.Start();
             }
-        }   
+        }
+
+        private void cancelButton_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

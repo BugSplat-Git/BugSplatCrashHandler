@@ -43,31 +43,37 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FileName,
             this.Directory});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 132);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 101);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(375, 172);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Size = new System.Drawing.Size(375, 203);
+            this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.TabStop = false;
             // 
             // FileName
             // 
             this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FileName.HeaderText = "FileName:";
+            this.FileName.HeaderText = "FileName";
             this.FileName.Name = "FileName";
             this.FileName.ReadOnly = true;
             // 
             // Directory
             // 
             this.Directory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Directory.HeaderText = "Location:";
+            this.Directory.HeaderText = "Location";
             this.Directory.Name = "Directory";
             this.Directory.ReadOnly = true;
             // 
@@ -75,27 +81,29 @@
             // 
             this.CrashDetailsLabel1.Location = new System.Drawing.Point(12, 19);
             this.CrashDetailsLabel1.Name = "CrashDetailsLabel1";
-            this.CrashDetailsLabel1.Size = new System.Drawing.Size(383, 71);
+            this.CrashDetailsLabel1.Size = new System.Drawing.Size(383, 54);
             this.CrashDetailsLabel1.TabIndex = 1;
-            this.CrashDetailsLabel1.Text = resources.GetString("CrashDetailsLabel1.Text");
+            this.CrashDetailsLabel1.Text = "This crash report contains detailed information about the state of the applicatio" +
+    "n at the time it crashed, as well as any information you provided.";
             // 
             // CrashDetailsLabel2
             // 
-            this.CrashDetailsLabel2.Location = new System.Drawing.Point(12, 90);
+            this.CrashDetailsLabel2.Location = new System.Drawing.Point(12, 73);
             this.CrashDetailsLabel2.Name = "CrashDetailsLabel2";
-            this.CrashDetailsLabel2.Size = new System.Drawing.Size(375, 30);
+            this.CrashDetailsLabel2.Size = new System.Drawing.Size(375, 25);
             this.CrashDetailsLabel2.TabIndex = 2;
-            this.CrashDetailsLabel2.Text = "The files below will included with this report to allow detailed analysis of the " +
-    "crash.";
+            this.CrashDetailsLabel2.Text = "The files below will included with this report.";
             // 
             // OK
             // 
+            this.OK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.OK.Location = new System.Drawing.Point(162, 321);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(75, 23);
-            this.OK.TabIndex = 3;
+            this.OK.TabIndex = 1;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.OK_Click);
             // 
             // CrashDataDetails
             // 
@@ -117,10 +125,10 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn FileName;
-        private DataGridViewTextBoxColumn Directory;
         private Label CrashDetailsLabel1;
         private Label CrashDetailsLabel2;
         private Button OK;
+        private DataGridViewTextBoxColumn FileName;
+        private DataGridViewTextBoxColumn Directory;
     }
 }

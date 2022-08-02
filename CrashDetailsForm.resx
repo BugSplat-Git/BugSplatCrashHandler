@@ -63,9 +63,6 @@
   <metadata name="Directory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="CrashDetailsLabel1.Text" xml:space="preserve">
-    <value>A crash report has been generated, containing the files shown below.  The report contains detailed information about the state of the application at the time it crashed, as well as any information you provided.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
