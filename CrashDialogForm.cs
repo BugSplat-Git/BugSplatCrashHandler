@@ -1,5 +1,6 @@
 ﻿
 using BugSplatDotNetStandard;
+using Microsoft.Win32;
 using System.Diagnostics;
 
 namespace BugSplatCrashHandler
@@ -7,30 +8,36 @@ namespace BugSplatCrashHandler
     public partial class CrashReportDialog : Form
     {
         // State variables describing the crash to upload
-
         string database = "";
         string application = "";
         string version = "";
         FileInfo? minidumpPath; 
         MinidumpPostOptions options = new MinidumpPostOptions();
-
-        string crashType = "";
-        string minidump = "";
         string notes = "";
-        string user = "";
-        //string email = "";
-        string userDescription = "";
         string logFilePath = "";
+        RegistryKey? userCredsKey = null;
+
+        // Registry constants
+        const string UserCredsKey = "Software\\BugSplat\\UserCredentials";
+        const string UserNameKey = "UserName";
+        const string UserEmailKey = "UserEmail";
 
         public CrashReportDialog()
         {           
             InitializeComponent();
+            InitializeOptions();
+        }
 
+        private void InitializeOptions()
+        {
+            userCredsKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(UserCredsKey);
+
+            // Allow either Database or Vendor (legacy) for database property
             database = Program.crash_ini.Read("Database");
-            if( database == "")
+            if (database == "")
             {
                 database = Program.crash_ini.Read("Vendor");
-                if( database == "")
+                if (database == "")
                 {
                     MessageBox.Show("No database property found!");
                     Application.Exit();
@@ -46,14 +53,42 @@ namespace BugSplatCrashHandler
             string minidump = Program.crash_ini.Read("MiniDump", true);
             minidumpPath = new FileInfo(minidump);
 
-            // I need API support for this?
+            // ToDo: We need API support for the Notes field
             notes = Program.crash_ini.Read("Notes", false);
 
-            string user = Program.crash_ini.Read("User", false);
-            options.User = user;
+            // Read default user/email from ini
+            options.User = Program.crash_ini.Read("User", false);
+            options.Email = Program.crash_ini.Read("Email", false);
 
-            string email = Program.crash_ini.Read("Email", false);
-            options.Email = email;
+            // If defaults for user/email are empty, get last user-entered values
+            if (options.User.Length == 0)
+            {
+                //RegistryKey? rk = Registry.CurrentUser.OpenSubKey(UserCredsKey);
+                if (userCredsKey != null)
+                {
+                    Object? rval = userCredsKey.GetValue(UserNameKey, null);
+                    if (rval != null)
+                    {
+                        options.User = rval.ToString();
+                    }
+                }
+            }
+
+            if (options.Email.Length == 0)
+            {
+                //RegistryKey? rk = Registry.CurrentUser.OpenSubKey(UserCredsKey);
+                if (userCredsKey != null)
+                {
+                    Object? rval = userCredsKey.GetValue(UserEmailKey, null);
+                    if (rval != null)
+                    {
+                        options.Email = rval.ToString();
+                    }
+                }
+            }
+
+            username.Text = options.User;
+            email.Text = options.Email;
 
             string userDescription = Program.crash_ini.Read("UserDescription", false);
             options.Description = userDescription;
@@ -70,9 +105,9 @@ namespace BugSplatCrashHandler
             do
             {
                 string fname = Program.crash_ini.Read("AdditionalFile" + i++, false);
-                if (fname.Length <= 0) break;           
+                if (fname.Length <= 0) break;
                 FileInfo item = new FileInfo(fname);
-                options.Attachments.Add(item);               
+                options.Attachments.Add(item);
             } while (true);
         }
 
@@ -117,11 +152,21 @@ namespace BugSplatCrashHandler
         private void email_TextChanged(object sender, EventArgs e)
         {
             options.Email = email.Text;
+
+            if (userCredsKey != null)
+            {
+                userCredsKey.SetValue(UserEmailKey, email.Text);
+            }
         }
 
         private void username_TextChanged(object sender, EventArgs e)
         {
             options.User = username.Text;
+
+            if (userCredsKey != null)
+            {
+                userCredsKey.SetValue(UserNameKey, username.Text);
+            }
         }
 
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
