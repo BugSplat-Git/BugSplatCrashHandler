@@ -68,7 +68,7 @@ namespace BugSplatCrashHandler
             this.userDescriptionTextbox.Multiline = true;
             this.userDescriptionTextbox.Name = "userDescriptionTextbox";
             this.userDescriptionTextbox.Size = new System.Drawing.Size(395, 115);
-            this.userDescriptionTextbox.TabIndex = 3;
+            this.userDescriptionTextbox.TabIndex = 1;
             this.userDescriptionTextbox.TextChanged += new System.EventHandler(this.userDescriptionTextbox_TextChanged);
             // 
             // cancelButton
@@ -131,7 +131,7 @@ namespace BugSplatCrashHandler
             this.username.Location = new System.Drawing.Point(227, 218);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(182, 23);
-            this.username.TabIndex = 2;
+            this.username.TabIndex = 3;
             this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // email
@@ -140,7 +140,7 @@ namespace BugSplatCrashHandler
             this.email.Location = new System.Drawing.Point(14, 218);
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(182, 23);
-            this.email.TabIndex = 1;
+            this.email.TabIndex = 2;
             this.email.TextChanged += new System.EventHandler(this.email_TextChanged);
             // 
             // pictureBox2

@@ -18,9 +18,9 @@ namespace BugSplatCrashHandler
         RegistryKey? userCredsKey = null;
 
         // Registry constants
-        const string UserCredsKey = "Software\\BugSplat\\UserCredentials";
-        const string UserNameKey = "UserName";
-        const string UserEmailKey = "UserEmail";
+        const string USER_CREDS = "Software\\BugSplat\\UserCredentials";
+        const string USER_NAME = "UserName";
+        const string USER_EMAIL = "UserEmail";
 
         public CrashReportDialog()
         {           
@@ -30,7 +30,8 @@ namespace BugSplatCrashHandler
 
         private void InitializeOptions()
         {
-            userCredsKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(UserCredsKey);
+            // User entered credentials saved here
+            userCredsKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(USER_CREDS);
 
             // Allow either Database or Vendor (legacy) for database property
             database = Program.crash_ini.Read("Database");
@@ -63,52 +64,40 @@ namespace BugSplatCrashHandler
             // If defaults for user/email are empty, get last user-entered values
             if (options.User.Length == 0)
             {
-                //RegistryKey? rk = Registry.CurrentUser.OpenSubKey(UserCredsKey);
-                if (userCredsKey != null)
-                {
-                    Object? rval = userCredsKey.GetValue(UserNameKey, null);
-                    if (rval != null)
-                    {
-                        options.User = rval.ToString();
-                    }
-                }
+                Object? rval = userCredsKey?.GetValue(USER_NAME, null);
+                options.User = rval?.ToString();                
             }
 
             if (options.Email.Length == 0)
             {
-                //RegistryKey? rk = Registry.CurrentUser.OpenSubKey(UserCredsKey);
-                if (userCredsKey != null)
-                {
-                    Object? rval = userCredsKey.GetValue(UserEmailKey, null);
-                    if (rval != null)
-                    {
-                        options.Email = rval.ToString();
-                    }
-                }
+                Object? rval = userCredsKey?.GetValue(USER_EMAIL, null);
+                options.Email = rval?.ToString();
             }
 
+            // Update dialog text
             username.Text = options.User;
             email.Text = options.Email;
 
             string userDescription = Program.crash_ini.Read("UserDescription", false);
             options.Description = userDescription;
 
-            int i = 0;
+            // Add each file attachment
+            int attachmentNumber = 0;
             logFilePath = Program.crash_ini.Read("LogFilePath", false);
             if (logFilePath.Length > 0)
             {
-                i++;
+                attachmentNumber++;
                 FileInfo logFile = new FileInfo(logFilePath);
                 options.Attachments.Add(logFile);
             }
 
-            do
+            while(true)
             {
-                string fname = Program.crash_ini.Read("AdditionalFile" + i++, false);
+                string fname = Program.crash_ini.Read("AdditionalFile" + attachmentNumber++, false);
                 if (fname.Length <= 0) break;
                 FileInfo item = new FileInfo(fname);
                 options.Attachments.Add(item);
-            } while (true);
+            }
         }
 
         private void userDescriptionTextbox_TextChanged(object sender, EventArgs e)
@@ -117,13 +106,13 @@ namespace BugSplatCrashHandler
         }
 
         private async void sendErrorReportButton_Click(object sender, EventArgs e)
-        {
-            BugSplatDotNetStandard.BugSplat bs = new BugSplat(database, application, version);
+        {   
             if (minidumpPath != null)
             {
+                BugSplat bs = new BugSplat(database, application, version);
                 await bs.Post(minidumpPath, options);
-                Application.Exit();
             }
+            Application.Exit();
         }
 
         private BugSplat.MinidumpTypeId stringToMinidumpTypeId( string typestr)
@@ -152,21 +141,13 @@ namespace BugSplatCrashHandler
         private void email_TextChanged(object sender, EventArgs e)
         {
             options.Email = email.Text;
-
-            if (userCredsKey != null)
-            {
-                userCredsKey.SetValue(UserEmailKey, email.Text);
-            }
+            userCredsKey?.SetValue(USER_EMAIL, email.Text);
         }
 
         private void username_TextChanged(object sender, EventArgs e)
         {
             options.User = username.Text;
-
-            if (userCredsKey != null)
-            {
-                userCredsKey.SetValue(UserNameKey, username.Text);
-            }
+            userCredsKey?.SetValue(USER_NAME, username.Text);
         }
 
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
