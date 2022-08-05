@@ -1,8 +1,7 @@
-﻿using System.Text;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using System.Runtime.InteropServices;
-
+using System.Text;
+using System.Windows.Forms;
 
 namespace BugSplatCrashHandler
 {
@@ -32,7 +31,7 @@ namespace BugSplatCrashHandler
             var RetVal = new StringBuilder(255);
             GetPrivateProfileString("BugSplat", Key, "", RetVal, 255, Path);
 
-            if( RetVal.Length == 0 && required == true )
+            if (RetVal.Length == 0 && required == true)
             {
                 MessageBox.Show($"Missing required parameter {Key}");
                 Application.Exit();
@@ -41,17 +40,17 @@ namespace BugSplatCrashHandler
             return RetVal.ToString();
         }
 
-        public void Write(string Key, string Value, string? Section = null)
+        public void Write(string Key, string Value, string Section = null)
         {
             WritePrivateProfileString(Section ?? "BugSplat", Key, Value, Path);
         }
 
-        public void DeleteKey(string Key, string? Section = null)
+        public void DeleteKey(string Key, string Section = null)
         {
             Write(Key, "", Section ?? "BugSplat");
         }
 
-        public void DeleteSection(string? Section = null)
+        public void DeleteSection(string Section = null)
         {
             Write("", "", Section ?? "BugSplat");
         }
@@ -61,5 +60,5 @@ namespace BugSplatCrashHandler
             return Read(Key).Length > 0;
         }
     }
-    
+
 }

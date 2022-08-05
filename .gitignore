@@ -1,8 +1,4 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs/BugSplatCrashHandler
-/obj
-/bin/Debug/net6.0-windows
-/.vs/ProjectEvaluation
+﻿.vs
+bin
+obj
+packages
