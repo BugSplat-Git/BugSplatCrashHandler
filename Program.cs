@@ -1,15 +1,18 @@
 using CommandLine;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace BugSplatCrashHandler
 {
     static class Program
     {
-        public static IniFile crash_ini = new IniFile();
+        public static IniFile CrashIni { get; private set; } = new IniFile();
 
         public class Options
         {
             [Option('i', "iniFile", Required = false, HelpText = "Configuration file.")]
-            public String? IniFile { get; set; }
+            public string IniFile { get; set; }
 
             [Option('q', "quietMode", Required = false, HelpText = "Don't prompt for user input.")]
             public bool QuietMode { get; set; }
@@ -23,13 +26,12 @@ namespace BugSplatCrashHandler
             // We won't get here if IniFile is null, but the compiler can't figure that out
             if (opts.IniFile != null)
             {
-                crash_ini = new IniFile(opts.IniFile);
+                CrashIni = new IniFile(opts.IniFile);
             }
 
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CrashReportDialog());
+            Application.Run(new CrashDialogForm());
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
@@ -42,8 +44,8 @@ namespace BugSplatCrashHandler
         [STAThread]
         static void Main()
         {
-            string[] args = Environment.GetCommandLineArgs();
-            CommandLine.Parser.Default.ParseArguments<Options>(args)
+            var args = Environment.GetCommandLineArgs();
+            Parser.Default.ParseArguments<Options>(args)
                                   .WithParsed(RunOptions)
                                   .WithNotParsed(HandleParseError);
 
