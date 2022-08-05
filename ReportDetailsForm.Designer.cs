@@ -1,6 +1,6 @@
 ﻿namespace BugSplatCrashHandler
 {
-    partial class CrashDataDetails
+    partial class ReportDetailsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,107 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrashDataDetails));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Directory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CrashDetailsLabel1 = new System.Windows.Forms.Label();
-            this.CrashDetailsLabel2 = new System.Windows.Forms.Label();
-            this.OK = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportDetailsForm));
+            this.label1 = new System.Windows.Forms.Label();
+            this.attachmentsGridView = new System.Windows.Forms.DataGridView();
+            this.fileNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.okButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.attachmentsGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // label1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(379, 82);
+            this.label1.TabIndex = 0;
+            // 
+            // attachmentsGridView
+            // 
+            this.attachmentsGridView.AllowUserToAddRows = false;
+            this.attachmentsGridView.AllowUserToDeleteRows = false;
+            this.attachmentsGridView.AllowUserToResizeRows = false;
+            this.attachmentsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FileName,
-            this.Directory});
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 101);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(375, 203);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.TabStop = false;
+            this.attachmentsGridView.BackgroundColor = System.Drawing.Color.White;
+            this.attachmentsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.attachmentsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fileNameColumn,
+            this.locationColumn});
+            this.attachmentsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.attachmentsGridView.Location = new System.Drawing.Point(12, 98);
+            this.attachmentsGridView.Name = "attachmentsGridView";
+            this.attachmentsGridView.RowHeadersVisible = false;
+            this.attachmentsGridView.Size = new System.Drawing.Size(380, 211);
+            this.attachmentsGridView.TabIndex = 1;
             // 
-            // FileName
+            // fileNameColumn
             // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FileName.HeaderText = "FileName";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
+            this.fileNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fileNameColumn.HeaderText = "File Name";
+            this.fileNameColumn.Name = "fileNameColumn";
+            this.fileNameColumn.ReadOnly = true;
             // 
-            // Directory
+            // locationColumn
             // 
-            this.Directory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Directory.HeaderText = "Location";
-            this.Directory.Name = "Directory";
-            this.Directory.ReadOnly = true;
+            this.locationColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.locationColumn.HeaderText = "Location";
+            this.locationColumn.Name = "locationColumn";
+            this.locationColumn.ReadOnly = true;
             // 
-            // CrashDetailsLabel1
+            // okButton
             // 
-            this.CrashDetailsLabel1.Location = new System.Drawing.Point(12, 19);
-            this.CrashDetailsLabel1.Name = "CrashDetailsLabel1";
-            this.CrashDetailsLabel1.Size = new System.Drawing.Size(383, 54);
-            this.CrashDetailsLabel1.TabIndex = 1;
-            this.CrashDetailsLabel1.Text = "This crash report contains detailed information about the state of the applicatio" +
-    "n at the time it crashed, as well as any information you provided.";
+            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
+            this.okButton.FlatAppearance.BorderSize = 0;
+            this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.okButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.okButton.ForeColor = System.Drawing.Color.White;
+            this.okButton.Location = new System.Drawing.Point(142, 322);
+            this.okButton.Margin = new System.Windows.Forms.Padding(0, 12, 12, 0);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(125, 30);
+            this.okButton.TabIndex = 10;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // CrashDetailsLabel2
+            // label2
             // 
-            this.CrashDetailsLabel2.Location = new System.Drawing.Point(12, 73);
-            this.CrashDetailsLabel2.Name = "CrashDetailsLabel2";
-            this.CrashDetailsLabel2.Size = new System.Drawing.Size(375, 25);
-            this.CrashDetailsLabel2.TabIndex = 2;
-            this.CrashDetailsLabel2.Text = "The files below will included with this report.";
+            this.label2.Location = new System.Drawing.Point(12, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(380, 82);
+            this.label2.TabIndex = 11;
+            this.label2.Text = resources.GetString("label2.Text");
             // 
-            // OK
-            // 
-            this.OK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.OK.Location = new System.Drawing.Point(162, 321);
-            this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(75, 23);
-            this.OK.TabIndex = 1;
-            this.OK.Text = "OK";
-            this.OK.UseVisualStyleBackColor = true;
-            this.OK.Click += new System.EventHandler(this.OK_Click);
-            // 
-            // CrashDataDetails
+            // ReportDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 356);
-            this.Controls.Add(this.OK);
-            this.Controls.Add(this.CrashDetailsLabel2);
-            this.Controls.Add(this.CrashDetailsLabel1);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(404, 361);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.okButton);
+            this.Controls.Add(this.attachmentsGridView);
+            this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "CrashDataDetails";
-            this.Text = "Crash Data Details";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(420, 400);
+            this.Name = "ReportDetailsForm";
+            this.Text = "Crash Report Details";
+            ((System.ComponentModel.ISupportInitialize)(this.attachmentsGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
-
         #endregion
 
-        private DataGridView dataGridView1;
-        private Label CrashDetailsLabel1;
-        private Label CrashDetailsLabel2;
-        private Button OK;
-        private DataGridViewTextBoxColumn FileName;
-        private DataGridViewTextBoxColumn Directory;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView attachmentsGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationColumn;
+        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.Label label2;
     }
 }

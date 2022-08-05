@@ -86,6 +86,12 @@
     <Compile Include="IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDetailsForm.Designer.cs">
+      <DependentUpon>ReportDetailsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CrashDialogForm.resx">
       <DependentUpon>CrashDialogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +104,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportDetailsForm.resx">
+      <DependentUpon>ReportDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

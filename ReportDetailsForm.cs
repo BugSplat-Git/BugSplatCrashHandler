@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace BugSplatCrashHandler
 {
-    public partial class CrashDataDetails : Form
+    public partial class ReportDetailsForm : Form
     {
-        public CrashDataDetails( List<FileInfo> Attachments )
+        public ReportDetailsForm(IEnumerable<FileInfo> Attachments)
         {
             InitializeComponent();
 
-            foreach (FileInfo fInfo in Attachments)
+            foreach (var fileInfo in Attachments)
             {
-                this.dataGridView1.Rows.Add(fInfo.Name, fInfo.Directory);
+                attachmentsGridView.Rows.Add(fileInfo.Name, fileInfo.Directory);
             }
         }
 
-        private void OK_Click(object sender, EventArgs e)
+        private void okButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

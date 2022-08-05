@@ -155,7 +155,7 @@ namespace BugSplatCrashHandler
 
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
         {
-            // TODO BG
+            new ReportDetailsForm(options.Attachments).ShowDialog();
         }
 
         private void poweredByBugSplatLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
