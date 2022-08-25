@@ -20,12 +20,12 @@ namespace BugSplatCrashHandler
             [Option('z', "zipFile", Required = false, HelpText = "Zipped crash report to upload.")]
             public bool ZipFile { get; set; }
 
-            // TODO DP handle 'l' (MDSF_LOGFILE)
-            [Option('l', "logToFile", Required = false, HelpText = "Write BugSplatCrashHandler log statements to a file.")]
+            // TODO DP handle 'f' (MDSF_LOGFILE)
+            [Option('f', "logToFile", Required = false, HelpText = "Write BugSplatCrashHandler log statements to a file.")]
             public bool LogToFile { get; set; }
 
-            // TODO DP handle 'c' (MDSF_LOGCONSOLE)
-            [Option('c', "logToConsole", Required = false, HelpText = "Write BugSplatCrashHandler log statements to standard output.")]
+            // TODO DP handle 'l' (MDSF_LOGCONSOLE)
+            [Option('l', "logToConsole", Required = false, HelpText = "Write BugSplatCrashHandler log statements to standard output.")]
             public bool LogToConsole { get; set; }
         }
 
