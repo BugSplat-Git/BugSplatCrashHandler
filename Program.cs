@@ -121,9 +121,13 @@ namespace BugSplatCrashHandler
 
             var bugsplat = new BugSplat(database, application, version);
 
-            if (opts.QuietMode)
+            if (opts.QuietMode && !minidump.Exists)
             {
-                // TODO BG make sure minidump exists at path
+                Environment.Exit(1);
+            }
+
+            if (opts.QuietMode && minidump.Exists)
+            {
                 bugsplat.Post(minidump, options).Wait();
                 Environment.Exit(0);
             }
