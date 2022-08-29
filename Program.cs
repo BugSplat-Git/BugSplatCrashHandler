@@ -53,9 +53,10 @@ namespace BugSplatCrashHandler
         static void Main()
         {
             var args = Environment.GetCommandLineArgs();
-            Parser.Default.ParseArguments<Options>(args)
-                                  .WithParsed(RunOptions)
-                                  .WithNotParsed(HandleParseError);
+            new Parser(with => { with.IgnoreUnknownArguments = true; })
+                .ParseArguments<Options>(args)
+                .WithParsed(RunOptions)
+                .WithNotParsed(HandleParseError);
 
         }
     }
