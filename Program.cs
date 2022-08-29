@@ -154,14 +154,13 @@ namespace BugSplatCrashHandler
                 .WithNotParsed(HandleParseError);
         }
 
-
         private static BugSplat.MinidumpTypeId StringToMinidumpTypeId(string typestr)
         {
             if (typestr.Equals("Windows.Native", StringComparison.OrdinalIgnoreCase))
             {
                 return BugSplat.MinidumpTypeId.WindowsNative;
             }
-            else if (typestr.Equals("DotNet", StringComparison.OrdinalIgnoreCase))
+            else if (typestr.Equals("Windows.NET", StringComparison.OrdinalIgnoreCase))
             {
                 return BugSplat.MinidumpTypeId.DotNet;
             }
