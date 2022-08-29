@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using BugSplatDotNetStandard;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace BugSplatCrashHandler
 {
@@ -69,7 +70,10 @@ namespace BugSplatCrashHandler
 
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
         {
-            new ReportDetailsForm(options.Attachments).ShowDialog();
+            var files = new List<FileInfo>();
+            files.Add(minidump);
+            files.AddRange(options.Attachments);
+            new ReportDetailsForm(files).ShowDialog();
         }
 
         private void poweredByBugSplatLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
