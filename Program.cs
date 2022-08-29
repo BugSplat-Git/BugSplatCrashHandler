@@ -1,6 +1,9 @@
+using BugSplatDotNetStandard;
 using CommandLine;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace BugSplatCrashHandler
@@ -8,6 +11,10 @@ namespace BugSplatCrashHandler
     static class Program
     {
         public static IniFile CrashIni { get; private set; } = new IniFile();
+
+        public static readonly string USER_CREDS_REGISTRY_KEY_PATH = "Software\\BugSplat\\UserCredentials";
+        public static readonly string USER_NAME_REGISTRY_KEY = "UserName";
+        public static readonly string USER_EMAIL_REGISTRY_KEY = "UserEmail";
 
         public class Options
         {
@@ -37,9 +44,97 @@ namespace BugSplatCrashHandler
                 CrashIni = new IniFile(opts.IniFile);
             }
 
+            var options = new MinidumpPostOptions();
+
+            // User entered credentials saved here
+            var userCredsKey = Registry.CurrentUser.CreateSubKey(USER_CREDS_REGISTRY_KEY_PATH);
+
+            // Allow either Database or Vendor (legacy) for database property
+            var database = CrashIni.Read("Database");
+            database = string.IsNullOrEmpty(database) ? CrashIni.Read("Vendor") : database;
+            if (string.IsNullOrEmpty(database))
+            {
+                MessageBox.Show("No database property found!", "Error");
+                Environment.Exit(1);
+            }
+
+            var application = CrashIni.Read("Application", true);
+            var version = CrashIni.Read("Version", true);
+
+            var crashType = CrashIni.Read("CrashType", true);
+            options.MinidumpType = StringToMinidumpTypeId(crashType);
+
+            var minidumpPath = CrashIni.Read("MiniDump", true);
+            var minidump = new FileInfo(minidumpPath);
+
+            // ToDo: We need API support for the Notes field
+            var notes = CrashIni.Read("Notes", false);
+
+            // Read default user/email from ini
+            options.User = CrashIni.Read("User", false);
+            options.Email = CrashIni.Read("Email", false);
+
+            // If defaults for user/email are empty, get last user-entered values
+            if (options.User.Length == 0)
+            {
+                var rval = userCredsKey?.GetValue(USER_NAME_REGISTRY_KEY, null);
+                options.User = rval?.ToString();
+            }
+
+            if (options.Email.Length == 0)
+            {
+                var rval = userCredsKey?.GetValue(USER_EMAIL_REGISTRY_KEY, null);
+                options.Email = rval?.ToString();
+            }
+
+            var userDescription = CrashIni.Read("UserDescription", false);
+            options.Description = userDescription;
+
+            // Add each file attachment
+            var attachmentNumber = 0;
+            var logFilePath = CrashIni.Read("LogFilePath", false);
+            if (logFilePath.Length > 0)
+            {
+                attachmentNumber++;
+                var logFile = new FileInfo(logFilePath);
+                if (logFile.Exists)
+                {
+                    // TODO BG move to BugSplatDotNetStandard?
+                    options.Attachments.Add(logFile);
+                }
+            }
+
+            while (true)
+            {
+                var fname = CrashIni.Read("AdditionalFile" + attachmentNumber++, false);
+                if (fname.Length <= 0)
+                {
+                    break;
+                }
+                var item = new FileInfo(fname);
+                if (item.Exists)
+                {
+                    // TODO BG move to BugSplatDotNetStandard?
+                    options.Attachments.Add(item);
+                }
+            }
+
+            var bugsplat = new BugSplat(database, application, version);
+
+            if (opts.QuietMode && !minidump.Exists)
+            {
+                Environment.Exit(1);
+            }
+
+            if (opts.QuietMode && minidump.Exists)
+            {
+                bugsplat.Post(minidump, options).Wait();
+                Environment.Exit(0);
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CrashDialogForm());
+            Application.Run(new CrashDialogForm(bugsplat, minidump, options));
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
@@ -57,7 +152,25 @@ namespace BugSplatCrashHandler
                 .ParseArguments<Options>(args)
                 .WithParsed(RunOptions)
                 .WithNotParsed(HandleParseError);
+        }
 
+
+        private static BugSplat.MinidumpTypeId StringToMinidumpTypeId(string typestr)
+        {
+            if (typestr.Equals("Windows.Native", StringComparison.OrdinalIgnoreCase))
+            {
+                return BugSplat.MinidumpTypeId.WindowsNative;
+            }
+            else if (typestr.Equals("DotNet", StringComparison.OrdinalIgnoreCase))
+            {
+                return BugSplat.MinidumpTypeId.DotNet;
+            }
+            else if (typestr.Equals("UnityNativeWindows", StringComparison.OrdinalIgnoreCase))
+            {
+                return BugSplat.MinidumpTypeId.UnityNativeWindows;
+            }
+
+            return BugSplat.MinidumpTypeId.Unknown;
         }
     }
 }
