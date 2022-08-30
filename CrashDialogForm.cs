@@ -40,11 +40,12 @@ namespace BugSplatCrashHandler
             options.Description = userDescriptionTextBox.Text;
         }
 
-        private async void sendErrorReportButton_Click(object sender, EventArgs e)
+        private void sendErrorReportButton_Click(object sender, EventArgs e)
         {
             if (File.Exists(minidump?.FullName))
             {
-                await bugsplat.Post(minidump, options);
+                var poster = new CrashPoster(bugsplat);
+                poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
             }
             Application.Exit();
         }
