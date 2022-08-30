@@ -33,6 +33,7 @@ namespace BugSplatCrashHandler
             // Update dialog text
             usernameTextBox.Text = options.User;
             emailTextBox.Text = options.Email;
+            userDescriptionTextBox.Text = options.Description;
         }
 
         private void userDescriptionTextBox_TextChanged(object sender, EventArgs e)
