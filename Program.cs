@@ -1,9 +1,12 @@
 using BugSplatDotNetStandard;
 using CommandLine;
 using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BugSplatCrashHandler
@@ -128,7 +131,8 @@ namespace BugSplatCrashHandler
 
             if (opts.QuietMode && minidump.Exists)
             {
-                bugsplat.Post(minidump, options).Wait();
+                var poster = new CrashPoster(bugsplat);
+                poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
                 Environment.Exit(0);
             }
 
