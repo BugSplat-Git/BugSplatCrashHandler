@@ -43,11 +43,14 @@ namespace BugSplatCrashHandler
 
         private void sendErrorReportButton_Click(object sender, EventArgs e)
         {
+            sendErrorReportButton.Enabled = false;
+
             if (File.Exists(minidump?.FullName))
             {
                 var poster = new CrashPoster(bugsplat);
                 poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
             }
+
             Application.Exit();
         }
 
