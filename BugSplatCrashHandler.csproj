@@ -73,7 +73,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>splat.ico</ApplicationIcon>
+    <ApplicationIcon>bug.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BugSplatDotNetStandard, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -163,7 +163,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="splat.ico" />
+    <Content Include="bug.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
