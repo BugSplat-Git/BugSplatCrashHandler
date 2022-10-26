@@ -41,11 +41,6 @@ namespace BugSplatCrashHandler
 
         static void RunOptions(Options opts)
         {
-            while (!Debugger.IsAttached)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
-            
             // We won't get here if IniFile is null, but the compiler can't figure that out
             if (opts.IniFile != null)
             {
