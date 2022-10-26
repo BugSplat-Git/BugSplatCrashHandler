@@ -31,4 +31,4 @@ Run the project to post a test crash to the public "Fred" database.
 
 ## ⚙️ Integration
 
-To use BugSplatCrashHandler in your project, first integrate with BugSplat's Windows C++ or .NET Framework SDKs. Next, build the BugSplatCrashHandler project. Finally, rename BugSplatCrashHandler.exe,|exe.config|.pdb to BsSndRpt.exe|.exe.config|.pdb respectively. Generate a crash in your program and you should see the new dialog.
+To use BugSplatCrashHandler in your project, first integrate with BugSplat's Windows C++ or .NET Framework SDKs. Next, build the BugSplatCrashHandler project. In this project's build output, rename BugSplatCrashHandler.exe,|exe.config|.pdb to BsSndRpt.exe|.exe.config|.pdb respectively. Copy all the files in this project's build output to your project's build output. Finally, generate a crash in your program and you should see the new dialog.
