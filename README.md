@@ -23,7 +23,7 @@ Clone this repo
 git clone https://github.com/BugSplat-Git/BugSplatCrashHandler
 ```
 
-Double click `CrashReportForm.cs` to open the Form Designer.
+Double click `CrashDialogForm.cs` to open the Form Designer.
 
 ![BugSplatCrashHandlerForm](https://user-images.githubusercontent.com/2646053/197914670-dbe6f1ff-1dc3-4c3a-9742-f1fc916e06b1.png)
 
