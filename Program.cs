@@ -94,22 +94,20 @@ namespace BugSplatCrashHandler
             options.Description = userDescription;
 
             // Add each file attachment
-            var attachmentNumber = 0;
             var logFilePath = CrashIni.Read("LogFilePath", false);
             if (logFilePath.Length > 0)
             {
-                attachmentNumber++;
                 var logFile = new FileInfo(logFilePath);
                 if (logFile.Exists)
                 {
-                    // TODO BG move to BugSplatDotNetStandard?
                     options.Attachments.Add(logFile);
                 }
             }
 
+            var attachmentIndex = 0;
             while (true)
             {
-                var fname = CrashIni.Read("AdditionalFile" + attachmentNumber++, false);
+                var fname = CrashIni.Read("AdditionalFile" + attachmentIndex++, false);
                 if (fname.Length <= 0)
                 {
                     break;
@@ -117,7 +115,6 @@ namespace BugSplatCrashHandler
                 var item = new FileInfo(fname);
                 if (item.Exists)
                 {
-                    // TODO BG move to BugSplatDotNetStandard?
                     options.Attachments.Add(item);
                 }
             }
