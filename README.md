@@ -25,7 +25,7 @@ git clone https://github.com/BugSplat-Git/BugSplatCrashHandler
 
 Double click `CrashReportForm.cs` to open the Form Designer.
 
-![BugSplatCrashHandlerForm](https://user-images.githubusercontent.com/2646053/197913717-4d3f4c91-8a15-4f23-a215-0e6724c2f365.png)
+![BugSplatCrashHandlerForm](https://user-images.githubusercontent.com/2646053/197914670-dbe6f1ff-1dc3-4c3a-9742-f1fc916e06b1.png)
 
 Run the project to post a test crash to the public "Fred" database.
 
