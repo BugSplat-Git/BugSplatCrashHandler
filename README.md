@@ -17,7 +17,7 @@ BugSplatCrashHandler is a drop-in replacement for BsSndRpt and BsSndRpt64 built 
 
 ## 🧑‍💻 Development
 
-Clone this repo
+Clone this repo.
 
 ```sh
 git clone https://github.com/BugSplat-Git/BugSplatCrashHandler
