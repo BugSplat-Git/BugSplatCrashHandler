@@ -15,13 +15,28 @@ namespace BugSplatCrashHandler
             this.bugsplat = bugsplat;
         }
 
-        public void PostCrashAndDisplaySupportResponseIfAvailable(FileInfo minidump, MinidumpPostOptions options)
+        public void PostCrashAndDisplaySupportResponseIfAvailable(FileInfo crashReportFile, MinidumpPostOptions options)
         {
-            var body = Task.Run(async () => {
-                var response = await bugsplat.Post(minidump, options);
-                var content = await response.Content.ReadAsStringAsync();
-                return content;
-            }).Result;
+            string body = null;
+            if (crashReportFile.Extension.Equals(".dmp"))
+            {
+                body = Task.Run(async () =>
+                {
+                    var response = await bugsplat.Post(crashReportFile, options);
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+                }).Result;
+            }
+            else if (crashReportFile.Extension.Equals(".xml"))
+            {
+                body = Task.Run(async () =>
+                {
+                    // ToDo: Post to xmlReport method
+                    var response = await bugsplat.Post(crashReportFile, options);
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+                }).Result;
+            }
 
             var json = JObject.Parse(body);
             var infoUrl = json["infoUrl"]?.ToString();

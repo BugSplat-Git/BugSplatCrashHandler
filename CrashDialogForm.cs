@@ -12,14 +12,14 @@ namespace BugSplatCrashHandler
     {
         BugSplat bugsplat;
         MinidumpPostOptions options;
-        FileInfo minidump;
+        FileInfo crashReportFile;
         RegistryKey userCredsKey;
 
 
-        public CrashDialogForm(BugSplat bugsplat, FileInfo minidump, MinidumpPostOptions options)
+        public CrashDialogForm(BugSplat bugsplat, FileInfo crashReportFile, MinidumpPostOptions options)
         {
             this.bugsplat = bugsplat;
-            this.minidump = minidump;
+            this.crashReportFile = crashReportFile;
             this.options = options;
             InitializeComponent();
             InitializeOptions();
@@ -45,10 +45,10 @@ namespace BugSplatCrashHandler
         {
             sendErrorReportButton.Enabled = false;
 
-            if (File.Exists(minidump?.FullName))
+            if (File.Exists(crashReportFile?.FullName))
             {
                 var poster = new CrashPoster(bugsplat);
-                poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
+                poster.PostCrashAndDisplaySupportResponseIfAvailable(crashReportFile, options);
             }
 
             Application.Exit();
@@ -76,7 +76,7 @@ namespace BugSplatCrashHandler
         private void viewReportDetailsButton_Click(object sender, EventArgs e)
         {
             var files = new List<FileInfo>();
-            files.Add(minidump);
+            files.Add(crashReportFile);
             files.AddRange(options.Attachments);
             new ReportDetailsForm(files).ShowDialog();
         }

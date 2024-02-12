@@ -67,8 +67,16 @@ namespace BugSplatCrashHandler
             var crashType = CrashIni.Read("CrashType", true);
             options.MinidumpType = StringToMinidumpTypeId(crashType);
 
-            var minidumpPath = CrashIni.Read("MiniDump", true);
-            var minidump = new FileInfo(minidumpPath);
+            var minidumpPath = CrashIni.Read("MiniDump", false);
+            var xmlReportPath = CrashIni.Read("XmlReport", false);
+
+            if( String.IsNullOrEmpty(minidumpPath) && String.IsNullOrEmpty(xmlReportPath) )
+            {
+                MessageBox.Show($"Either MiniDump or XmlReport parameter is required");
+                Application.Exit();
+            }
+
+            var crashReportFile = String.IsNullOrEmpty(xmlReportPath) ? new FileInfo(minidumpPath) : new FileInfo(xmlReportPath);
 
             // ToDo: We need API support for the Notes field
             var notes = CrashIni.Read("Notes", false);
@@ -121,21 +129,21 @@ namespace BugSplatCrashHandler
 
             var bugsplat = new BugSplat(database, application, version);
 
-            if (opts.QuietMode && !minidump.Exists)
+            if (opts.QuietMode && !crashReportFile.Exists)
             {
                 Environment.Exit(1);
             }
 
-            if (opts.QuietMode && minidump.Exists)
+            if (opts.QuietMode && crashReportFile.Exists)
             {
                 var poster = new CrashPoster(bugsplat);
-                poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
+                poster.PostCrashAndDisplaySupportResponseIfAvailable(crashReportFile, options);
                 Environment.Exit(0);
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CrashDialogForm(bugsplat, minidump, options));
+            Application.Run(new CrashDialogForm(bugsplat, crashReportFile, options));
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
