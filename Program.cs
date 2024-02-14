@@ -67,7 +67,7 @@ namespace BugSplatCrashHandler
             var minidumpPath = CrashIni.Read("MiniDump", false);
             var xmlReportPath = CrashIni.Read("XmlReport", false);
 
-            if (string.IsNullOrEmpty(minidumpPath) && string.IsNullOrEmpty(xmlReportPath) )
+            if (string.IsNullOrEmpty(minidumpPath) && string.IsNullOrEmpty(xmlReportPath))
             {
                 MessageBox.Show($"Either MiniDump or XmlReport parameter is required");
                 Application.Exit();
