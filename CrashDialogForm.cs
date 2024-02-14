@@ -11,12 +11,12 @@ namespace BugSplatCrashHandler
     public partial class CrashDialogForm : Form
     {
         BugSplat bugsplat;
-        MinidumpPostOptions options;
+        BugSplatPostOptions options;
         FileInfo crashReportFile;
         RegistryKey userCredsKey;
 
 
-        public CrashDialogForm(BugSplat bugsplat, FileInfo crashReportFile, MinidumpPostOptions options)
+        public CrashDialogForm(BugSplat bugsplat, FileInfo crashReportFile, BugSplatPostOptions options)
         {
             this.bugsplat = bugsplat;
             this.crashReportFile = crashReportFile;

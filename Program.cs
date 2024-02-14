@@ -1,13 +1,12 @@
 using BugSplatDotNetStandard;
 using CommandLine;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static BugSplatDotNetStandard.BugSplat;
 
 namespace BugSplatCrashHandler
 {
@@ -47,7 +46,7 @@ namespace BugSplatCrashHandler
                 CrashIni = new IniFile(opts.IniFile);
             }
 
-            var options = new MinidumpPostOptions();
+            var options = new BugSplatPostOptions();
 
             // User entered credentials saved here
             var userCredsKey = Registry.CurrentUser.CreateSubKey(USER_CREDS_REGISTRY_KEY_PATH);
@@ -64,19 +63,18 @@ namespace BugSplatCrashHandler
             var application = CrashIni.Read("Application", true);
             var version = CrashIni.Read("Version", true);
 
-            var crashType = CrashIni.Read("CrashType", true);
-            options.MinidumpType = StringToMinidumpTypeId(crashType);
-
+            var crashType = CrashIni.Read("CrashType", false);
             var minidumpPath = CrashIni.Read("MiniDump", false);
             var xmlReportPath = CrashIni.Read("XmlReport", false);
 
-            if( String.IsNullOrEmpty(minidumpPath) && String.IsNullOrEmpty(xmlReportPath) )
+            if (string.IsNullOrEmpty(minidumpPath) && string.IsNullOrEmpty(xmlReportPath) )
             {
                 MessageBox.Show($"Either MiniDump or XmlReport parameter is required");
                 Application.Exit();
             }
 
-            var crashReportFile = String.IsNullOrEmpty(xmlReportPath) ? new FileInfo(minidumpPath) : new FileInfo(xmlReportPath);
+            var crashReportFile = string.IsNullOrEmpty(xmlReportPath) ? new FileInfo(minidumpPath) : new FileInfo(xmlReportPath);
+            options.CrashTypeId = crashReportFile.Extension.ToLower().Equals(".xml") ? XmlNameToXmlCrashTypeId(crashReportFile.Name) : CrashTypeStringToCrashTypeId(crashType);
 
             // ToDo: We need API support for the Notes field
             var notes = CrashIni.Read("Notes", false);
@@ -163,22 +161,33 @@ namespace BugSplatCrashHandler
                 .WithNotParsed(HandleParseError);
         }
 
-        private static BugSplat.MinidumpTypeId StringToMinidumpTypeId(string typestr)
+        private static int CrashTypeStringToCrashTypeId(string typestr)
         {
             if (typestr.Equals("Windows.Native", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.WindowsNative;
+                return (int)MinidumpTypeId.WindowsNative;
             }
             else if (typestr.Equals("Windows.NET", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.DotNet;
+                return (int)MinidumpTypeId.DotNet;
             }
             else if (typestr.Equals("UnityNativeWindows", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.UnityNativeWindows;
+                return (int)MinidumpTypeId.UnityNativeWindows;
             }
 
-            return BugSplat.MinidumpTypeId.Unknown;
+            return (int)MinidumpTypeId.Unknown;
+        }
+
+        private static int XmlNameToXmlCrashTypeId(string name)
+        {
+            var asan = new Regex("bsAsanReport.*\\.xml");
+            if (asan.IsMatch(name))
+            {
+                return (int)XmlTypeId.Asan;
+            }
+
+            return (int)XmlTypeId.Xml;
         }
     }
 }
