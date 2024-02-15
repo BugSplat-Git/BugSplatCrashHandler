@@ -1,13 +1,12 @@
 using BugSplatDotNetStandard;
 using CommandLine;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static BugSplatDotNetStandard.BugSplat;
 
 namespace BugSplatCrashHandler
 {
@@ -47,7 +46,7 @@ namespace BugSplatCrashHandler
                 CrashIni = new IniFile(opts.IniFile);
             }
 
-            var options = new MinidumpPostOptions();
+            var options = new BugSplatPostOptions();
 
             // User entered credentials saved here
             var userCredsKey = Registry.CurrentUser.CreateSubKey(USER_CREDS_REGISTRY_KEY_PATH);
@@ -64,11 +63,18 @@ namespace BugSplatCrashHandler
             var application = CrashIni.Read("Application", true);
             var version = CrashIni.Read("Version", true);
 
-            var crashType = CrashIni.Read("CrashType", true);
-            options.MinidumpType = StringToMinidumpTypeId(crashType);
+            var crashType = CrashIni.Read("CrashType", false);
+            var minidumpPath = CrashIni.Read("MiniDump", false);
+            var xmlReportPath = CrashIni.Read("XmlReport", false);
 
-            var minidumpPath = CrashIni.Read("MiniDump", true);
-            var minidump = new FileInfo(minidumpPath);
+            if (string.IsNullOrEmpty(minidumpPath) && string.IsNullOrEmpty(xmlReportPath))
+            {
+                MessageBox.Show($"Either MiniDump or XmlReport parameter is required");
+                Application.Exit();
+            }
+
+            var crashReportFile = string.IsNullOrEmpty(xmlReportPath) ? new FileInfo(minidumpPath) : new FileInfo(xmlReportPath);
+            options.CrashTypeId = crashReportFile.Extension.ToLower().Equals(".xml") ? XmlNameToXmlCrashTypeId(crashReportFile.Name) : CrashTypeStringToCrashTypeId(crashType);
 
             // ToDo: We need API support for the Notes field
             var notes = CrashIni.Read("Notes", false);
@@ -121,21 +127,21 @@ namespace BugSplatCrashHandler
 
             var bugsplat = new BugSplat(database, application, version);
 
-            if (opts.QuietMode && !minidump.Exists)
+            if (opts.QuietMode && !crashReportFile.Exists)
             {
                 Environment.Exit(1);
             }
 
-            if (opts.QuietMode && minidump.Exists)
+            if (opts.QuietMode && crashReportFile.Exists)
             {
                 var poster = new CrashPoster(bugsplat);
-                poster.PostCrashAndDisplaySupportResponseIfAvailable(minidump, options);
+                poster.PostCrashAndDisplaySupportResponseIfAvailable(crashReportFile, options);
                 Environment.Exit(0);
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CrashDialogForm(bugsplat, minidump, options));
+            Application.Run(new CrashDialogForm(bugsplat, crashReportFile, options));
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
@@ -155,22 +161,33 @@ namespace BugSplatCrashHandler
                 .WithNotParsed(HandleParseError);
         }
 
-        private static BugSplat.MinidumpTypeId StringToMinidumpTypeId(string typestr)
+        private static int CrashTypeStringToCrashTypeId(string typestr)
         {
             if (typestr.Equals("Windows.Native", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.WindowsNative;
+                return (int)MinidumpTypeId.WindowsNative;
             }
             else if (typestr.Equals("Windows.NET", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.DotNet;
+                return (int)MinidumpTypeId.DotNet;
             }
             else if (typestr.Equals("UnityNativeWindows", StringComparison.OrdinalIgnoreCase))
             {
-                return BugSplat.MinidumpTypeId.UnityNativeWindows;
+                return (int)MinidumpTypeId.UnityNativeWindows;
             }
 
-            return BugSplat.MinidumpTypeId.Unknown;
+            return (int)MinidumpTypeId.Unknown;
+        }
+
+        private static int XmlNameToXmlCrashTypeId(string name)
+        {
+            var asan = new Regex("bsAsanReport.*\\.xml");
+            if (asan.IsMatch(name))
+            {
+                return (int)XmlTypeId.Asan;
+            }
+
+            return (int)XmlTypeId.Xml;
         }
     }
 }

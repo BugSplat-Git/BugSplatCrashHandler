@@ -1,0 +1,59 @@
+<asanreport><version>1.0</version><data>![CDATA[
+=================================================================
+==12548==ERROR: AddressSanitizer: attempting double-free on 0x11c152c24f00 in thread T0:
+==12548==WARNING: Failed to use and restart external symbolizer!
+    #0 0x7ff69d5dbadd in operator delete D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_win_delete_scalar_size_thunk.cpp:42
+    #1 0x7ff69d58788f in HeapCorruption C:\www\bugsplat-sdks\Samples\MyConsoleCrasher\myConsoleCrasher.cpp:382
+    #2 0x7ff69d58df7d in wmain C:\www\bugsplat-sdks\Samples\MyConsoleCrasher\myConsoleCrasher.cpp:162
+    #3 0x7ff69d623ef8 in invoke_main D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:90
+    #4 0x7ff69d623e1d in __scrt_common_main_seh D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:288
+    #5 0x7ff69d623cdd in __scrt_common_main D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:330
+    #6 0x7ff69d623f6d in wmainCRTStartup D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_wmain.cpp:16
+    #7 0x7ffa06c27ac3 in BaseThreadInitThunk+0x13 (C:\Windows\System32\KERNEL32.DLL+0x180017ac3)
+    #8 0x7ffa078da4e0 in RtlUserThreadStart+0x20 (C:\Windows\SYSTEM32\ntdll.dll+0x18005a4e0)
+
+0x11c152c24f00 is located 0 bytes inside of 24-byte region [0x11c152c24f00,0x11c152c24f18)
+freed by thread T0 here:
+    #0 0x7ff69d5bf086 in __asan_wrap_RtlAllocateHeap D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_malloc_win.cpp:1316
+    #1 0x7ffa0460b5c5 in malloc_base+0x35 (C:\Windows\System32\ucrtbase.dll+0x18000b5c5)
+    #2 0x7ffa0460c494 in realloc_base+0x54 (C:\Windows\System32\ucrtbase.dll+0x18000c494)
+    #3 0x7ffa0460e6ad in Getdays+0x7d (C:\Windows\System32\ucrtbase.dll+0x18000e6ad)
+    #4 0x7ffa0460ea73 in register_onexit_function+0x253 (C:\Windows\System32\ucrtbase.dll+0x18000ea73)
+    #5 0x7ffa0460e90a in register_onexit_function+0xea (C:\Windows\System32\ucrtbase.dll+0x18000e90a)
+    #6 0x7ffa0460e8bf in register_onexit_function+0x9f (C:\Windows\System32\ucrtbase.dll+0x18000e8bf)
+    #7 0x7ffa04610624 in o__register_onexit_function+0x34 (C:\Windows\System32\ucrtbase.dll+0x180010624)
+    #8 0x7ff9f56a4525 in SymLoadModuleEx+0xd65 (C:\Windows\SYSTEM32\dbghelp.dll+0x103014525)
+    #9 0x7ff9f56a4548 in SymLoadModuleEx+0xd88 (C:\Windows\SYSTEM32\dbghelp.dll+0x103014548)
+    #10 0x7ffa0461e8e2 in initterm+0x42 (C:\Windows\System32\ucrtbase.dll+0x18001e8e2)
+    #11 0x7ff9f56a3d71 in SymLoadModuleEx+0x5b1 (C:\Windows\SYSTEM32\dbghelp.dll+0x103013d71)
+    #12 0x7ff9f56a3ef3 in SymLoadModuleEx+0x733 (C:\Windows\SYSTEM32\dbghelp.dll+0x103013ef3)
+    #13 0x7ffa078a5d36 in RtlAnsiStringToUnicodeString+0x296 (C:\Windows\SYSTEM32\ntdll.dll+0x180025d36)
+    #14 0x7ffa078a85e8 in RtlGetVersion+0x4d8 (C:\Windows\SYSTEM32\ntdll.dll+0x1800285e8)
+    #15 0x7ffa078a8853 in RtlGetVersion+0x743 (C:\Windows\SYSTEM32\ntdll.dll+0x180028853)
+    #16 0x7ffa078a95a8 in LdrShutdownProcess+0x4b8 (C:\Windows\SYSTEM32\ntdll.dll+0x1800295a8)
+    #17 0x7ffa078a6920 in RtlMultiByteToUnicodeSize+0x1d0 (C:\Windows\SYSTEM32\ntdll.dll+0x180026920)
+    #18 0x7ffa078a3237 in RtlCreateUnicodeStringFromAsciiz+0xe7 (C:\Windows\SYSTEM32\ntdll.dll+0x180023237)
+    #19 0x7ffa078a2793 in LdrLoadDll+0xe3 (C:\Windows\SYSTEM32\ntdll.dll+0x180022793)
+    #20 0x7ffa04719590 in LoadLibraryExW+0x160 (C:\Windows\System32\KERNELBASE.dll+0x180019590)
+    #21 0x7ffa04712c80 in LoadLibraryExA+0x30 (C:\Windows\System32\KERNELBASE.dll+0x180012c80)
+    #22 0x7ffa0477a5fe in LoadLibraryA+0x3e (C:\Windows\System32\KERNELBASE.dll+0x18007a5fe)
+    #23 0x7ff69d594bf2 in __sanitizer::InitializeDbgHelpIfNeeded D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\sanitizer_common\sanitizer_symbolizer_win.cpp:65
+    #24 0x7ff69d59576c in __sanitizer::`anonymous namespace'::WinSymbolizerTool::SymbolizePC D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\sanitizer_common\sanitizer_symbolizer_win.cpp:137
+    #25 0x7ff69d597a0a in __sanitizer::Symbolizer::SymbolizePC D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\sanitizer_common\sanitizer_symbolizer_libcdep.cpp:97
+    #26 0x7ff69d598df1 in __sanitizer::StackTrace::Print D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\sanitizer_common\sanitizer_stacktrace_libcdep.cpp:55
+    #27 0x7ff69d5cf5df in __asan::ErrorDoubleFree::Print D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_errors.cpp:57
+    #28 0x7ff69d5b5f18 in __asan::ScopedInErrorReport::~ScopedInErrorReport D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_report.cpp:141
+
+previously allocated by thread T0 here:
+    #0 0x7ff69d5dba6a in operator new D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_win_new_scalar_thunk.cpp:41
+    #1 0x7ff69d58778f in HeapCorruption C:\www\bugsplat-sdks\Samples\MyConsoleCrasher\myConsoleCrasher.cpp:357
+    #2 0x7ff69d58df7d in wmain C:\www\bugsplat-sdks\Samples\MyConsoleCrasher\myConsoleCrasher.cpp:162
+    #3 0x7ff69d623ef8 in invoke_main D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:90
+    #4 0x7ff69d623e1d in __scrt_common_main_seh D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:288
+    #5 0x7ff69d623cdd in __scrt_common_main D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:330
+    #6 0x7ff69d623f6d in wmainCRTStartup D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_wmain.cpp:16
+    #7 0x7ffa06c27ac3 in BaseThreadInitThunk+0x13 (C:\Windows\System32\KERNEL32.DLL+0x180017ac3)
+    #8 0x7ffa078da4e0 in RtlUserThreadStart+0x20 (C:\Windows\SYSTEM32\ntdll.dll+0x18005a4e0)
+
+SUMMARY: AddressSanitizer: double-free D:\a\_work\1\s\src\vctools\crt\asan\llvm\compiler-rt\lib\asan\asan_win_delete_scalar_size_thunk.cpp:42 in operator delete
+]]</data></asanreport>
