@@ -1,5 +1,5 @@
 ﻿using BugSplatDotNetStandard;
-using Newtonsoft.Json.Linq;
+using BugSplatDotNetStandard.Http;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -23,8 +23,8 @@ namespace BugSplatCrashHandler
                 var content = await response.Content.ReadAsStringAsync();
                 return content;
             }).Result;
-            var json = JObject.Parse(body);
-            var infoUrl = json["infoUrl"]?.ToString();
+            var json = new JsonObject(body);
+            var infoUrl = json.GetValue(new string[] { "infoUrl" });          
 
             if (!string.IsNullOrEmpty(infoUrl))
             {
